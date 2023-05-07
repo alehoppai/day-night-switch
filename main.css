@@ -1,0 +1,354 @@
+* {
+  /* Main colors */
+  --bg: rgb(204 211 226);
+  --text: rgb(146 151 167);
+
+  /* Day colors */
+  --sun: rgb(240 187 55);
+  --day-bg-3: rgb(96 141 197);
+  --day-bg-2: rgb(84 130 188);;
+  --day-bg-1: rgb(69 116 180);
+  --day-bg: rgb(51 101 170);
+  --cloud-front: rgb(240 248 253);
+  --cloud-back: rgb(240 248 253 / 50%);
+
+  /* Night colors */
+  --moon: rgb(188 193 201);
+  --crate: rgb(137 146 168);
+  --night-bg-3: rgb(70 72 81);
+  --night-bg-2: rgb(56 58 71);
+  --night-bg-1: rgb(38 42 52);
+  --night-bg: rgb(25 27 40);
+  --star: rgb(241 245 253);
+
+  /* Sizes */
+  --active-item-size: 60px;
+  --dns-gap: 12px;
+
+  /* Light drop */
+  --light-drop: rgb(218 223 207);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+label[for="day-night-switch"] {
+  cursor: pointer;
+}
+
+input#day-night-switch {
+  display: none;
+}
+
+/* Day + Common */
+.dns-container {
+  margin: 100px;
+  position: relative;
+  width: calc((var(--active-item-size) * 3) + var(--dns-gap));
+  height: calc(var(--active-item-size) + var(--dns-gap));
+  background-color: var(--day-bg);
+  border-radius: var(--active-item-size);
+  overflow: hidden;
+  z-index: 9;
+}
+
+.dns-container::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  box-shadow: inset 0 0 20px 10px rgb(0 0 0 / 25%);
+}
+
+.active-item {
+  transition: 300ms ease-in-out;
+  height: calc(var(--active-item-size) + var(--dns-gap));
+}
+
+.active-item > div {
+  border-radius: 100%;
+  position: absolute;
+  transition: 300ms ease-in-out;
+}
+
+.main-item {
+  width: var(--active-item-size);
+  height: var(--active-item-size);
+  background-color: var(--sun);
+  top: calc(var(--dns-gap) / 2);
+  left: var(--dns-gap);
+  z-index: 6;
+  position: relative;
+  box-shadow: 0 2px 10px 2px rgb(0 0 0 / 50%);
+}
+
+.main-item::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: calc(var(--active-item-size) - 1px);
+  height: calc(var(--active-item-size) - 1px);
+  background-color: transparent;
+  box-shadow: -1px -1px 2px 0 var(--light-drop);
+  border-radius: 100%;
+  bottom: 0;
+  right: 0;
+}
+
+.main-item::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: calc(var(--active-item-size) - 1px);
+  height: calc(var(--active-item-size) - 1px);
+  background-image: linear-gradient(to bottom, rgb(0 0 0 / 0%), rgb(0 0 0 / 05%) 90%); 
+  filter: drop-shadow(0 2px 3px #000);
+  border-radius: 100%;
+  right: 0;
+  left: 0;
+}
+
+.main-item > .crate {
+  display: none;
+  border-radius: 100%;
+  background-color: var(--crate);
+  box-shadow: inset 0.5px 0.5px rgba(0 0 0 / 50%);
+  z-index: 5;
+}
+
+.main-item > .crate:nth-child(1) {
+  position: absolute;
+  width: calc(var(--active-item-size) / 2.5);
+  height: calc(var(--active-item-size) / 2.5);
+  left: 20%;
+  top: 40%;
+}
+
+.main-item > .crate:nth-child(2) {
+  position: absolute;
+  width: calc(var(--active-item-size) / 4);
+  height: calc(var(--active-item-size) / 4);
+  top: 10%;
+  left: 50%;
+}
+
+.main-item > .crate:nth-child(3) {
+  position: absolute;
+  width: calc(var(--active-item-size) / 5);
+  height: calc(var(--active-item-size) / 5);
+  top: 60%;
+  left: 70%;
+}
+
+.active-item > .fade-3 {
+  width: calc(var(--active-item-size) * 2);
+  height: calc(var(--active-item-size) * 2);
+  background-color: var(--day-bg-3);
+  z-index: 3;
+  top: calc((var(--dns-gap) / 2) - (var(--active-item-size) / 2));
+  left: calc(var(--dns-gap) - (var(--active-item-size) / 2));
+}
+
+.active-item > .fade-2 {
+  width: calc(var(--active-item-size) * 3);
+  height: calc(var(--active-item-size) * 3);
+  background-color: var(--day-bg-2);
+  z-index: 2;
+  top: calc((var(--dns-gap) / 2) - (var(--active-item-size) * 2 / 2));
+  left: calc(var(--dns-gap) - (var(--active-item-size) * 2 / 2));
+}
+
+.active-item > .fade-1 {
+  width: calc(var(--active-item-size) * 4);
+  height: calc(var(--active-item-size) * 4);
+  background-color: var(--day-bg-1);
+  z-index: 1;
+  top: calc((var(--dns-gap) / 2) - (var(--active-item-size) * 3 / 2));
+  left: calc(var(--dns-gap) - (var(--active-item-size) * 3 / 2));
+}
+
+.stars {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  left: -300%;
+  transition: 300ms ease-in-out;
+}
+
+.stars > .cluster {
+  position: absolute;
+  z-index: 5;
+}
+
+.stars > .cluster:nth-child(1) {
+  top: 20%;
+  left: 50%;
+}
+
+.stars > .cluster:nth-child(2) {
+  top: 70%;
+  left: 15%;
+  transform: rotateZ(200deg);
+}
+
+.star {
+  position: absolute;
+}
+
+.star::before {
+  content: "\2726";
+  color: rgb(243 245 254);
+}
+
+.cluster > .star:nth-child(1) {
+  top: 5px;
+  right: -15px;
+  font-size: 18px;
+}
+
+.cluster > .star:nth-child(2) {
+  top: 5px;
+  right: 5px;
+  font-size: 5px;
+}
+
+.cluster > .star:nth-child(3) {
+  top: 25px;
+  right: 15px;
+  font-size: 5px;
+}
+
+.cluster > .star:nth-child(4) {
+  top: 35px;
+  right: 0;
+  font-size: 14px;
+}
+
+.cluster > .star:nth-child(5) {
+  top: 25px;
+  right: -10px;
+  font-size: 8px;
+}
+
+.clouds {
+  top: 0;
+  left: 0;
+}
+
+.clouds,
+.clouds > .fg,
+.clouds > .bg {
+  width: 100%;
+  height: inherit;
+}
+
+.clouds > .fg,
+.clouds > .bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.clouds div {
+  position: absolute;
+  border-radius: 100%;
+  width: var(--active-item-size);
+  height: var(--active-item-size);
+  transition: 200ms ease-in-out;
+  left: 10%;
+}
+
+.clouds > .fg {
+  z-index: 5;
+}
+
+.clouds > .bg {
+  z-index: 4;
+  opacity: 0.5;
+  transform: translateY(-35%);
+}
+
+.clouds .cloud {
+  background-color: white;
+  bottom: -50%;
+}
+
+.clouds .cloud:nth-child(1) {
+  left: 5%;
+  bottom: -35%;
+}
+
+.clouds .cloud:nth-child(2) {
+  left: 20%;
+  bottom: -60%; 
+}
+
+.clouds .cloud:nth-child(3) {
+  left: 40%;
+  bottom: -50%;
+}
+
+.clouds .cloud:nth-child(4) {
+  left: 50%;
+  bottom: -40%;
+}
+
+.clouds .cloud:nth-child(5) {
+  left: 55%;
+  bottom: -50%;
+}
+
+.clouds .cloud:nth-child(6) {
+  left: 70%;
+  bottom: -25%;
+}
+
+.clouds .cloud:nth-child(7) {
+  left: 80%;
+  bottom: 0;
+}
+
+/* Night */
+input#day-night-switch:checked + .dns-container {
+  background-color: var(--night-bg);
+}
+
+input#day-night-switch:checked + .dns-container > .active-item > .main-item {
+  background-color: var(--moon);
+  left: calc(var(--active-item-size) * 2);
+}
+
+input#day-night-switch:checked + .dns-container > .active-item > .fade-3 {
+  background-color: var(--night-bg-3);
+  top: calc((var(--dns-gap) / 2) - (var(--active-item-size) / 2));
+  left: calc((var(--active-item-size) / 2) * 3);
+}
+
+input#day-night-switch:checked + .dns-container > .active-item > .fade-2 {
+  background-color: var(--night-bg-2);
+  left: calc((var(--active-item-size) / 2) * 2);
+}
+
+input#day-night-switch:checked + .dns-container > .active-item > .fade-1 {
+  background-color: var(--night-bg-1);
+  left: calc(var(--active-item-size) / 2);
+}
+
+input#day-night-switch:checked + .dns-container > .active-item > .clouds .cloud {
+  transform: translateX(305%);
+}
+
+input#day-night-switch:checked + .dns-container > .active-item > .main-item > .crate {
+  display: block;
+}
+
+input#day-night-switch:checked + .dns-container > .active-item > .stars {
+  left: 0;
+}

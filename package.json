@@ -1,0 +1,16 @@
+{
+  "name": "day-night-switch",
+  "version": "0.0.1",
+  "description": "Day/Night switch implementation. Implemented with plain html/css on a label/input[checkbox] base.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "stylelint": "^15.6.1",
+    "stylelint-config-standard": "^33.0.0"
+  }
+}
