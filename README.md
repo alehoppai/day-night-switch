@@ -7,4 +7,5 @@ One evening I was scrolling instagram and found some funny video (I don't want t
 ## Preview
 
 Here what I got, hope you'll like it.
+
 ![Preview image](static/preview.gif)
